@@ -19,6 +19,8 @@ export const appRoutes: Routes = [
   { path: 'users', component: UsersComponent }, // localhost:4200/users
   { path: 'users/:id/:name', component: UserComponent }, // localhost:4200/users/:id
   { path: 'servers', component: ServersComponent }, // localhost:4200/servers
+  { path: 'servers/:id', component: ServerComponent }, // localhost:4200/servers/:id
+  { path: 'servers/:id/edit', component: EditServerComponent }, // localhost:4200/:id/edit
 
 ];
 
