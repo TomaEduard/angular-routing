@@ -13,15 +13,22 @@ import { ServerComponent } from './servers/server/server.component';
 import { ServersService } from './servers/servers.service';
 
 import { Routes, RouterModule } from '@angular/router';
+import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 
 export const appRoutes: Routes = [
   { path: '', component: HomeComponent }, // localhost:4200/
-  { path: 'users', component: UsersComponent }, // localhost:4200/users
-  { path: 'users/:id/:name', component: UserComponent }, // localhost:4200/users/:id
-  { path: 'servers', component: ServersComponent }, // localhost:4200/servers
-  { path: 'servers/:id', component: ServerComponent }, // localhost:4200/servers/:id
-  { path: 'servers/:id/edit', component: EditServerComponent }, // localhost:4200/:id/edit
 
+  { path: 'users', component: UsersComponent, children: [ // localhost:4200/users
+    { path: ':id/:name', component: UserComponent }, // localhost:4200/users/:id
+  ] }, 
+  
+  { path: 'servers', component: ServersComponent, children: [ // localhost:4200/servers
+    { path: ':id', component: ServerComponent }, // localhost:4200/servers/:id
+    { path: ':id/edit', component: EditServerComponent }, // localhost:4200/:id/edit
+  ] }, 
+
+  { path: 'not-found', component: PageNotFoundComponent },
+  { path: '**', redirectTo: '/not-found'}
 ];
 
 @NgModule({
@@ -32,7 +39,8 @@ export const appRoutes: Routes = [
     ServersComponent,
     UserComponent,
     EditServerComponent,
-    ServerComponent
+    ServerComponent,
+    PageNotFoundComponent
   ],
   imports: [
     BrowserModule,
